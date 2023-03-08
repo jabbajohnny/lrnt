@@ -4,6 +4,8 @@ import com.example.lrnt.content.LearningAsset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,11 +24,8 @@ public class MyFirstApp {
         return "start";
     }
 
-    @RequestMapping("/post-asset")
-    public void postAsset(@RequestParam("title") String title, @RequestParam("description") String description) {
-        LearningAsset learningAsset = new LearningAsset(title,
-                description,
-                "no name",
-                "random shit");
+    @PostMapping("/")
+    public void postAsset(@ModelAttribute LearningAsset learningAsset) {
+        System.out.println("SUccess!");
     }
 }

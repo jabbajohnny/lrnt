@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>LRNT</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-Start page.
+<header>
+    <h1>LRNT</h1>
+</header>
+<nav>
+    <ul class="navbar">
+        <li><a href="#">Homepage</a></li>
+        <li><a href="#">Browse</a></li>
+        <li><a href="#">Account</a></li>
+    </ul>
+</nav>
 
-<form action="post-asset">
+<img id="homepage-image" th:src="@{/css/vectors/homepage.svg}" alt="Audio">
+<form action="post-asset" method="post">
     <label for="title"></label>
     <input type="text" name="title" id="title">
 

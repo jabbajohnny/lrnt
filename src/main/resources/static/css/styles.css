@@ -1,0 +1,26 @@
+body {
+    background: rgb(255,255,255);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(249,100,37,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+h1 {
+    color: chocolate;
+    text-align: center;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#homepage-image {
+    width: 40%;
+    float: right;
+    margin-right: 5%;
+}
+
