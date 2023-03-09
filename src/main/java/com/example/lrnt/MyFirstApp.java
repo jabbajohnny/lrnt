@@ -24,6 +24,11 @@ public class MyFirstApp {
         return "start";
     }
 
+    @RequestMapping("/account")
+    public String account() {
+        return "account";
+    }
+
     @PostMapping("/")
     public void postAsset(@ModelAttribute LearningAsset learningAsset) {
         System.out.println("SUccess!");
