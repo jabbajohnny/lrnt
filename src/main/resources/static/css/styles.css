@@ -1,4 +1,5 @@
 body {
+    font-family: 'League Spartan', sans-serif;
     background: rgb(255,255,255);
     background-size: cover;
     background-repeat: no-repeat;
@@ -8,19 +9,24 @@ body {
 }
 
 h1 {
-    color: chocolate;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 40px;
+    color: white;
     text-align: center;
 }
 
 .navbar li {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 20px;
     display: inline-block;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 13%;
+    margin-right: 13%;
 }
 
 #homepage-image {
-    width: 40%;
+    width: 25%;
     float: right;
-    margin-right: 5%;
+    margin-top: 5%;
+    margin-right: 15%;
 }
 
