@@ -22,14 +22,14 @@
     </ul>
 </nav>
 <main>
-    <form class="login-form">
+    <form class="login-form" id="login-form">
         <h2 class="login">Login</h2>
         <label class="login">Email: </label><input class="login" type="email" required>
         <label class="password-input">Password: </label><input class="login" type="password" required>
         <button class="submit-button" type="submit">Log in</button>
     </form>
 
-    <form class="signup-form">
+    <form class="signup-form" id="signup">
         <h2 class="login">Sign Up</h2>
         <label class="login">Name: </label><input class="login" type="text" required>
         <label class="login">Email: </label><input class="login" type="email" required>
@@ -39,4 +39,5 @@
     </form>
 </main>
 </body>
+<script th:src="@{/javascript/login-handler.js}"></script>
 </html>
