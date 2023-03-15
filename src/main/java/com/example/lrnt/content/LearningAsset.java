@@ -1,13 +1,8 @@
 package com.example.lrnt.content;
 
-import com.example.lrnt.MyFirstApp;
-import com.example.lrnt.database.AppJdbcTemplate;
+import com.example.lrnt.controllers.MyFirstApp;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

@@ -8,6 +8,8 @@ function sendData() {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    console.log(JSON.stringify(data));
+
     fetch("/api/register", {
         method: "POST",
         headers: {

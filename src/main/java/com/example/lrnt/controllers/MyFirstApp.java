@@ -1,4 +1,4 @@
-package com.example.lrnt;
+package com.example.lrnt.controllers;
 
 import com.example.lrnt.content.LearningAsset;
 import org.springframework.jdbc.core.JdbcTemplate;
