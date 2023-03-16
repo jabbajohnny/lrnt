@@ -17,9 +17,9 @@ public class AccountApiController {
     public void registerUser(@RequestBody User user) {
 
         String count = "SELECT COUNT(*) AS count " +
-                "FROM [lrnt].[dbo].[users]";
+                "FROM lrnt.users";
 
-        String sql = "INSERT INTO [lrnt].[dbo].[users] " +
+        String sql = "INSERT INTO lrnt.users " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         MyFirstApp.jdbcTemplate.update(sql, MyFirstApp.jdbcTemplate.queryForObject(count, Integer.class) + 1,
