@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MyFirstApp {
@@ -28,9 +29,11 @@ public class MyFirstApp {
     }
 
     @PostMapping("/")
-    public void postAsset(@ModelAttribute LearningAsset learningAsset) {
+    @ResponseBody
+    public ResponseBody postAsset(@ModelAttribute LearningAsset learningAsset) {
         System.out.println("SUccess!");
-    }
 
+        return null;
+    }
 
 }
