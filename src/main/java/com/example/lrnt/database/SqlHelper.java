@@ -7,7 +7,7 @@ public class SqlHelper {
     public static int count(String key, String type) {
         String countMail = "SELECT COUNT(1) " +
                 "FROM lrnt.users " +
-                "WHERE ?=?";
+                "WHERE email=?";
 
         String countUsername = "SELECT COUNT(1) " +
                 "FROM lrnt.users " +
@@ -17,7 +17,7 @@ public class SqlHelper {
             case "name" -> {
                 return MyFirstApp.jdbcTemplate.queryForObject(countUsername, Integer.class, key);
             }
-            case "mail" -> {
+            case "email" -> {
                 return MyFirstApp.jdbcTemplate.queryForObject(countMail, Integer.class, key);
             }
 

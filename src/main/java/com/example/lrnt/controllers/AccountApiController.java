@@ -1,5 +1,6 @@
 package com.example.lrnt.controllers;
 
+import com.example.lrnt.account.AccountVerifier;
 import com.example.lrnt.account.User;
 import com.example.lrnt.database.SqlHelper;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -23,5 +24,6 @@ public class AccountApiController {
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         return user.register();
     }
+
 
 }

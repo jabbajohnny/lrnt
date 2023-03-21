@@ -1,12 +1,12 @@
 package com.example.lrnt.controllers;
 
+import com.example.lrnt.account.AccountVerifier;
 import com.example.lrnt.content.LearningAsset;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MyFirstApp {
@@ -36,4 +36,11 @@ public class MyFirstApp {
         return null;
     }
 
+    @RequestMapping("/confirm")
+    public String confirm(@RequestParam("id") String id) {
+        if (AccountVerifier.verify(id).equals("confirmed")) {
+            return "confirm";
+        }
+        return "Error";
+    }
 }
