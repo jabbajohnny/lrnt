@@ -3,6 +3,9 @@ package com.example.lrnt.controllers;
 import com.example.lrnt.account.AccountVerifier;
 import com.example.lrnt.account.User;
 import com.example.lrnt.database.SqlHelper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.el.util.Validation;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties;
@@ -21,8 +24,10 @@ public class AccountApiController {
 
     @PostMapping("/api/register")
     @ResponseBody
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
-        return user.register();
+    public ResponseEntity<JsonNode> registerUser(@RequestBody User user) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", user.register()));
+        return ResponseEntity.ok(json);
     }
 
 

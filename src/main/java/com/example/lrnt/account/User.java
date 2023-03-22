@@ -16,31 +16,31 @@ import static com.example.lrnt.account.ResponseStatus.*;
 import static com.example.lrnt.controllers.MyFirstApp.jdbcTemplate;
 
 public record User(String username, String email, String password, String passwordRepeat) {
-    public ResponseStatus validate() {
+    public String validate() {
 
         if (SqlHelper.count(username, "name") != 0) {
-            return USERNAME_ALREADY_USED;
+            return USERNAME_ALREADY_USED.toString();
         }
 
         if (!EmailValidator.getInstance().isValid(email)) {
-            return EMAIL_NOT_VALID;
+            return EMAIL_NOT_VALID.toString();
         }
 
         if (SqlHelper.count(email, "email") != 0) {
-            return EMAIL_ALREADY_USED;
+            return EMAIL_ALREADY_USED.toString();
         }
 
         if (!password.equals(passwordRepeat)) {
-            return PASSWORDS_DONT_MATCH;
+            return PASSWORDS_DONT_MATCH.toString();
         }
 
-        return VALID;
+        return VALID.toString();
     }
 
-    public ResponseEntity<String> register() {
-        ResponseStatus status = validate();
-        if (status != VALID) {
-            return new ResponseEntity<>(status.toString(), HttpStatus.BAD_REQUEST);
+    public String register() {
+        String status = validate();
+        if (!status.equals(VALID.toString())) {
+            return status;
         }
 
         String id = RandomStringUtils.randomAlphanumeric(7);
@@ -69,6 +69,6 @@ public record User(String username, String email, String password, String passwo
         accountVerifier.id = id;
         accountVerifier.start();
 
-        return new ResponseEntity<>(status.toString(), HttpStatus.ACCEPTED);
+        return status;
     }
 }

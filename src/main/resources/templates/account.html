@@ -29,8 +29,9 @@
         <button class="submit-button" type="submit">Log in</button>
     </form>
 
-    <form class="signup-form" id="signup">
+    <form class="signup-form" id="signup" onsubmit="return registerUser()">
         <h2 class="login">Sign Up</h2>
+        <p id="error"></p>
         <label class="login">Username: </label><input class="login" type="text" name="username" required>
         <label class="login">Email: </label><input class="login" type="email" name="email" required>
         <label class="password-input">Password: </label><input class="login" type="password" name="password" required>
