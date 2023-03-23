@@ -17,12 +17,15 @@ function registerUser() {
         body: JSON.stringify(data)
     }).then(r => r.json())
         .then(data => {
-            console.log(JSON.stringify(data))
-
-            if (!data.toString().match("VALID")) {
-                errorMessage.innerText = JSON.stringify(data);
-                return false;
+            let info = JSON.parse(JSON.stringify(data)).error;
+            console.log(info)
+            if (info == "VALID") {
+                errorMessage.innerText = info;
+                window.location.href = '/';
+                return true;
             }
+            errorMessage.innerText = info;
+            return false;
         })
         .catch(error => console.error(error));
 }
