@@ -31,14 +31,14 @@ public class AccountVerifier extends Thread {
     public void run() {
         try {
             sendConfirmationEmail();
-            Thread.sleep(900_000);
+            Thread.sleep(60000);
 
             String sql = "SELECT confirm " +
-                    "FROM users " +
+                    "FROM lrnt.users " +
                     "WHERE id=?";
 
             String removeSql = "DELETE " +
-                    "FROM users " +
+                    "FROM lrnt.users " +
                     "WHERE id=?";
 
             if (!Boolean.TRUE.equals(MyFirstApp.jdbcTemplate.queryForObject(sql, Boolean.class, id))) {
