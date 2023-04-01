@@ -7,5 +7,6 @@ public enum ResponseStatus {
     PASSWORDS_DONT_MATCH,
     REGISTERED,
     LOGGED_IN,
-    VALID
+    VALID,
+    INVALID
 }

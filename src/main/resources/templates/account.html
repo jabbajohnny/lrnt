@@ -23,20 +23,21 @@
 </nav>
 <main>
     <form class="login-form" id="login-form">
+        <p id="error-login"></p>
         <h2 class="login">Login</h2>
-        <label class="login">Email: </label><input class="login" type="email" required>
-        <label class="password-input">Password: </label><input class="login" type="password" required>
+        <label class="login">Email: </label><input class="login" type="email" name="email" required>
+        <label class="password-input">Password: </label><input class="login" type="password" name="password" required>
         <button class="submit-button" type="submit">Log in</button>
     </form>
 
-    <form class="signup-form" id="signup">
+    <form class="signup-form" id="signup-form">
         <h2 class="login">Sign Up</h2>
-        <p id="error"></p>
+        <p id="error-signup"></p>
         <label class="login">Username: </label><input class="login" type="text" name="username" required>
         <label class="login">Email: </label><input class="login" type="email" name="email" required>
         <label class="password-input">Password: </label><input class="login" type="password" name="password" required>
         <label class="password-input">Repeat password: </label><input class="login" type="password" name="passwordRepeat" required>
-        <button class="submit-button" type="submit">Sign up</button>
+        <button class="submit-button" type="submit" id="submit-button">Sign up</button>
     </form>
 </main>
 </body>

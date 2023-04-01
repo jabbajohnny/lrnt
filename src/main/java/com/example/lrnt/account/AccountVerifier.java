@@ -2,6 +2,7 @@ package com.example.lrnt.account;
 
 
 import com.example.lrnt.controllers.MyFirstApp;
+import com.example.lrnt.database.SqlHelper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -15,7 +16,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 public class AccountVerifier extends Thread {
     String id;
@@ -31,7 +35,7 @@ public class AccountVerifier extends Thread {
     public void run() {
         try {
             sendConfirmationEmail();
-            Thread.sleep(60000);
+            Thread.sleep(6000000);
 
             String sql = "SELECT confirm " +
                     "FROM lrnt.users " +
@@ -57,6 +61,19 @@ public class AccountVerifier extends Thread {
 
         MyFirstApp.jdbcTemplate.update(sqlUpdate, id);
         return "confirmed";
+    }
+
+    public static boolean checkCredentials(String email, String password) {
+        if (SqlHelper.count(email, "email") == 0 ) return false;
+
+        String sqlSelect = String.format("SELECT password " +
+                "FROM lrnt.users " +
+                "WHERE email='%s'", email);
+
+        String passwordFromDatabase = MyFirstApp.jdbcTemplate.query(sqlSelect,
+                (rs, rowNum) -> rs.getString("password")).get(0);
+
+        return BCrypt.checkpw(password, passwordFromDatabase);
     }
 
 

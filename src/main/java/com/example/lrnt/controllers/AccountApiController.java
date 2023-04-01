@@ -1,5 +1,6 @@
 package com.example.lrnt.controllers;
 
+import com.example.lrnt.account.Account;
 import com.example.lrnt.account.AccountVerifier;
 import com.example.lrnt.account.User;
 import com.example.lrnt.database.SqlHelper;
@@ -30,5 +31,14 @@ public class AccountApiController {
         return ResponseEntity.ok(json);
     }
 
+    @PostMapping ("/api/login")
+    @ResponseBody
+    public ResponseEntity<JsonNode> login(@RequestBody User user) throws JsonProcessingException {
+        Account account = new Account();
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode json = mapper.readTree(String.format("{\"result\": \"%s\"}", account.login(user)));
+        return ResponseEntity.ok(json);
+    }
 
 }
