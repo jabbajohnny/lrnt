@@ -1,17 +1,11 @@
 package com.example.lrnt.account;
 
-import com.example.lrnt.controllers.MyFirstApp;
 import com.example.lrnt.database.SqlHelper;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import static com.example.lrnt.account.ResponseStatus.*;
 import static com.example.lrnt.controllers.MyFirstApp.jdbcTemplate;
 

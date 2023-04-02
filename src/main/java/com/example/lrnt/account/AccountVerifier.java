@@ -18,12 +18,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AccountVerifier extends Thread {
     String id;
     String email;
+
+    @Autowired
+    private UserRepository repository;
 
     private ApiValues apiValues;
 
@@ -37,7 +42,7 @@ public class AccountVerifier extends Thread {
             sendConfirmationEmail();
             Thread.sleep(6000000);
 
-            String sql = "SELECT confirm " +
+            /*String sql = "SELECT confirm " +
                     "FROM lrnt.users " +
                     "WHERE id=?";
 
@@ -47,6 +52,11 @@ public class AccountVerifier extends Thread {
 
             if (!Boolean.TRUE.equals(MyFirstApp.jdbcTemplate.queryForObject(sql, Boolean.class, id))) {
                 MyFirstApp.jdbcTemplate.update(sql, removeSql);
+            }
+
+             */
+            if(!repository.findAllByKey(id).get(0).confirmed) {
+                repository.deleteByKey(id);
             }
 
         } catch (InterruptedException | UnirestException e) {
