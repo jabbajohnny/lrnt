@@ -29,7 +29,7 @@ public class UserManager {
 
         String key = RandomStringUtils.randomAlphanumeric(7);
 
-        while(userRepository.existsByKey(key)) {
+        while(userRepository.existsById(key)) {
             key = RandomStringUtils.randomAlphanumeric(7);
         }
 

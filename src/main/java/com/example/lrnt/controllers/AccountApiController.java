@@ -3,12 +3,14 @@ package com.example.lrnt.controllers;
 import com.example.lrnt.account.Account;
 import com.example.lrnt.account.AccountVerifier;
 import com.example.lrnt.account.User;
+import com.example.lrnt.account.UserManager;
 import com.example.lrnt.database.SqlHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.el.util.Validation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,17 @@ import java.time.format.DateTimeFormatter;
 @RestController
 public class AccountApiController {
 
+    final UserManager userManager;
+
+    public AccountApiController(UserManager userManager) {
+        this.userManager = userManager;
+    }
+
     @PostMapping("/api/register")
     @ResponseBody
     public ResponseEntity<JsonNode> registerUser(@RequestBody User user) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", user.register()));
+        JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", userManager.registerUser(user)));
         return ResponseEntity.ok(json);
     }
 

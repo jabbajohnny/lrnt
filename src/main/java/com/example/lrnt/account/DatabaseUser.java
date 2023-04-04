@@ -5,21 +5,20 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "lrnt.users")
+@Table(name = "users")
 public class DatabaseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    private String key;
     public boolean confirmed;
     private String name;
     private String email;
     private String password;
     private String joinDate;
 
-    public DatabaseUser(String key, boolean confirmed, String name, String email, String password, String joinDate) {
-        this.key = key;
+    public DatabaseUser(String id, boolean confirmed, String name, String email, String password, String joinDate) {
+        this.id = id;
         this.confirmed = confirmed;
         this.name = name;
         this.email = email;
@@ -31,11 +30,11 @@ public class DatabaseUser {
 
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<DatabaseUser, Long> {
     boolean existsByEmail(String email);
     boolean existsByName(String name);
-    boolean existsByKey(String key);
-    List<DatabaseUser> findAllByKey(String key);
-    void deleteByKey(String key);
+    boolean existsById(String id);
+    List<DatabaseUser> findAllById(String id);
+    void deleteById(String key);
 }
