@@ -33,7 +33,7 @@ public class UserManager {
             key = RandomStringUtils.randomAlphanumeric(7);
         }
 
-        DatabaseUser databaseUser = new DatabaseUser(key, false,
+        DatabaseUser databaseUser = new DatabaseUser(key, 0,
                 user.username(), user.email(),
                 BCrypt.hashpw(user.password(), BCrypt.gensalt()),
                 LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -57,7 +57,7 @@ public class UserManager {
             return EMAIL_NOT_VALID.toString();
         }
 
-        if (userRepository.existsByName(user.username())) {
+        if (userRepository.existsByUsername(user.username())) {
             return USERNAME_ALREADY_USED.toString();
         }
 

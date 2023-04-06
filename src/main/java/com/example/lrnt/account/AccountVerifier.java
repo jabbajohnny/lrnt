@@ -30,7 +30,7 @@ public class AccountVerifier extends Thread {
             sendConfirmationEmail();
             Thread.sleep(6000000);
 
-            if(!repository.findAllById(id).get(0).confirmed) {
+            if(repository.findAllById(id).get(0).confirmed == 0) {
                 repository.deleteById(id);
             }
 
