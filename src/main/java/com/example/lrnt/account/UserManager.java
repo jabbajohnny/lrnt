@@ -1,9 +1,9 @@
 package com.example.lrnt.account;
 
+import com.example.lrnt.database.DatabaseUser;
+import com.example.lrnt.database.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 

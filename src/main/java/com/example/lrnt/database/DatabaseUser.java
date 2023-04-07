@@ -1,4 +1,4 @@
-package com.example.lrnt.account;
+package com.example.lrnt.database;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,7 @@
 package com.example.lrnt.controllers;
 
 import com.example.lrnt.account.AccountVerifier;
-import com.example.lrnt.account.UserRepository;
+import com.example.lrnt.database.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
