@@ -2,11 +2,10 @@ package com.example.lrnt.database;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
 
 @Entity
 @Table(name = "users")
-public class DatabaseUser implements UserDet{
+public class DatabaseUser {
 
     @Id
     @Column(name = "id")

@@ -19,11 +19,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>6.0.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -36,19 +34,6 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>3.0.4</version>
         </dependency>
-
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.8.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>4.8.3</version>
-        </dependency>
-
 
         <dependency>
             <groupId>mysql</groupId>
