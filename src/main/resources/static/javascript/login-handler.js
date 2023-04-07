@@ -51,7 +51,7 @@ function loginUser() {
         body: JSON.stringify(data)
     }).then(r => r.json())
         .then(data => {
-            let info = JSON.parse(JSON.stringify(data)).error;
+            let info = JSON.parse(JSON.stringify(data)).result;
             console.log(info)
             if (info == "LOGGED_IN") {
                 errorMessage.innerText = info;
@@ -61,5 +61,8 @@ function loginUser() {
             errorMessage.innerText = info;
             return false;
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error)
+            errorMessage.innerText = 'An error occurred!';
+        });
 }
