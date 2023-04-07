@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
-public class DatabaseUser {
+public class DatabaseUser implements UserDet{
 
     @Id
     @Column(name = "id")
