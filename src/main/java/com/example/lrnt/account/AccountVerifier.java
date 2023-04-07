@@ -1,8 +1,6 @@
 package com.example.lrnt.account;
 
 
-import com.example.lrnt.controllers.MyFirstApp;
-import com.example.lrnt.database.SqlHelper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -39,27 +37,15 @@ public class AccountVerifier extends Thread {
         }
     }
 
-    public static String verify(String id) {
-        String sqlUpdate = "UPDATE lrnt.users " +
-                "SET confirmed=1 " +
-                "WHERE id=?";
-
-        MyFirstApp.jdbcTemplate.update(sqlUpdate, id);
-
+    public static String verify(String id, UserRepository repository) {
+        repository.confirmUser(id);
         return "confirmed";
     }
 
-    public static boolean checkCredentials(String email, String password) {
-        if (SqlHelper.count(email, "email") == 0 ) return false;
+    public static boolean checkCredentials(String email, String password, UserRepository repository) {
+        if (!repository.existsByEmail(email)) return false;
 
-        String sqlSelect = String.format("SELECT password " +
-                "FROM lrnt.users " +
-                "WHERE email='%s'", email);
-
-        String passwordFromDatabase = MyFirstApp.jdbcTemplate.query(sqlSelect,
-                (rs, rowNum) -> rs.getString("password")).get(0);
-
-        return BCrypt.checkpw(password, passwordFromDatabase);
+        return BCrypt.checkpw(password, repository.findAllByEmail(email).get(0).getPassword());
     }
 
 
