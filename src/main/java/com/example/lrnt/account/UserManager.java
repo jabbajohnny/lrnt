@@ -36,7 +36,8 @@ public class UserManager {
         DatabaseUser databaseUser = new DatabaseUser(key, 0,
                 user.username(), user.email(),
                 BCrypt.hashpw(user.password(), BCrypt.gensalt()),
-                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                "USER");
 
         userRepository.save(databaseUser);
 
