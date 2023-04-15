@@ -55,33 +55,13 @@ function loginUser() {
         credentials:'include'
     }).then(r => r.json())
         .then(data => {
-            console.log(JSON.parse(JSON.stringify(data)).token)
+            const json = JSON.parse(JSON.stringify(data));
+            document.cookie='token='+ json.token;
+            window.location.href = '/';
         })
         .catch(error => {
             console.error(error)
             errorMessage.innerText = 'An error occurred!';
         });
 
-    fetch("/api/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    }).then(r => r.json())
-        .then(data => {
-            let info = JSON.parse(JSON.stringify(data)).result;
-            console.log(info)
-            if (info == "LOGGED_IN") {
-                errorMessage.innerText = info;
-                window.location.href = '/';
-                return true;
-            }
-            errorMessage.innerText = info;
-            return false;
-        })
-        .catch(error => {
-            console.error(error)
-            errorMessage.innerText = 'An error occurred!';
-        });
 }
