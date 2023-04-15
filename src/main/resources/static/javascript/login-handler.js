@@ -43,6 +43,25 @@ function loginUser() {
     const data = Object.fromEntries(formData.entries());
     const errorMessage = document.getElementById('error-login');
 
+    let email = JSON.parse(JSON.stringify(data)).email;
+    let password =  JSON.parse(JSON.stringify(data)).password;
+
+    fetch("/api/token", {
+        method: "POST",
+        body: JSON.stringify({email, password}),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials:'include'
+    }).then(r => r.json())
+        .then(data => {
+            console.log(JSON.parse(JSON.stringify(data)).token)
+        })
+        .catch(error => {
+            console.error(error)
+            errorMessage.innerText = 'An error occurred!';
+        });
+
     fetch("/api/login", {
         method: "POST",
         headers: {

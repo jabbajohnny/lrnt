@@ -1,5 +1,6 @@
 package com.example.lrnt.config;
 
+import com.example.lrnt.database.DatabaseUser;
 import com.example.lrnt.database.UserRepository;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -37,19 +38,27 @@ public class SecurityConfig {
     }
 
 
+
     @Bean
     public UserDetailsService users() {
-        return username -> repository.findAllByEmail(username).get(0);
+        return username -> {
+            DatabaseUser user = repository.findAllByEmail(username).get(0);
+            return User.builder()
+                    .username(user.getEmail())
+                    .password(user.getPassword())
+                    .roles(user.getRole())
+                    .build();
+        };
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .formLogin().disable()
                 .build();
     }
 

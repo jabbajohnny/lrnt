@@ -1,11 +1,13 @@
 package com.example.lrnt.controllers;
 
 import com.example.lrnt.account.*;
+import com.example.lrnt.config.TokenService;
 import com.example.lrnt.database.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,10 +15,13 @@ public class AccountApiController {
 
     final UserManager userManager;
     private final UserRepository repository;
+    private final TokenService tokenService;
 
-    public AccountApiController(UserManager userManager, UserRepository repository) {
+
+    public AccountApiController(UserManager userManager, UserRepository repository, TokenService tokenService) {
         this.userManager = userManager;
         this.repository = repository;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("/api/register")
@@ -34,6 +39,14 @@ public class AccountApiController {
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode json = mapper.readTree(String.format("{\"result\": \"%s\"}", account.login(user)));
+        return ResponseEntity.ok(json);
+    }
+
+    @PostMapping("/api/token")
+    @ResponseBody
+    public ResponseEntity<JsonNode> generateToken(@RequestBody User user) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode json = mapper.readTree(String.format("{\"token\": \"%s\"}", tokenService.generateToken(user.email(), user.password())));
         return ResponseEntity.ok(json);
     }
 
