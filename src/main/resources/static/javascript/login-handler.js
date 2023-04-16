@@ -8,6 +8,10 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     loginUser();
 });
 
+window.onload = function () {
+    let guestContent = document.getElementById("guest-content");
+    let userContent = document.getElementById("user-content");
+}
 
 
 function registerUser() {
@@ -46,11 +50,16 @@ function loginUser() {
     let email = JSON.parse(JSON.stringify(data)).email;
     let password =  JSON.parse(JSON.stringify(data)).password;
 
+    let name = 'token';
+    let token = (name = (document.cookie + ';').match(new RegExp(name + '=.*;'))) && name[0].split(/[=;]/)[1];
+    console.log(token);
+
     fetch("/api/token", {
         method: "POST",
         body: JSON.stringify({email, password}),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
         },
         credentials:'include'
     }).then(r => r.json())
@@ -60,7 +69,7 @@ function loginUser() {
             window.location.href = '/';
         })
         .catch(error => {
-            console.error(error)
+            console.error(error);
             errorMessage.innerText = 'An error occurred!';
         });
 

@@ -35,7 +35,7 @@ public class TokenService {
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
         if (AccountVerifier.checkCredentials(email, password, repository)) {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(email, userDetails.getPassword());
+            Authentication authentication = new UsernamePasswordAuthenticationToken(email, userDetails.getPassword(), userDetails.getAuthorities());
             Instant now = Instant.now();
             String scope = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)

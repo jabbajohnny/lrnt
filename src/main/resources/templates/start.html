@@ -22,8 +22,16 @@
     </ul>
 </nav>
 
-<button class="homepage-button">Let's find something!</button>
-<a href="/account"><button class="homepage-button" th:action="account">Log in or sign up!</button></a>
+<!-- content for visitors - not logged in -->
+<div id="guest-content" style="display: none;">
+    <button class="homepage-button">Let's find something!</button>
+    <a href="/account"><button class="homepage-button" th:action="account">Log in or sign up!</button></a>
+</div>
+
+<!-- content for users - logged in -->
+<div id="user-content" style="display: none;">
+    <button class="homepage-button">Let's find something!</button>
+</div>
 
 <img id="homepage-image" th:src="@{/css/vectors/homepage.svg}" alt="Audio">
 
