@@ -28,7 +28,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
     public RsaKeys rsaKeys;
@@ -58,8 +57,9 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                .httpBasic(Customizer.withDefaults())
+                .authorizeHttpRequests()
+                .requestMatchers("/account").authenticated().anyRequest().permitAll().and()
+                .httpBasic().disable()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .formLogin().disable()
                 .build();
@@ -76,4 +76,6 @@ public class SecurityConfig {
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }
+
+
 }
