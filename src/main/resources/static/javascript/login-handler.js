@@ -50,16 +50,12 @@ function loginUser() {
     let email = JSON.parse(JSON.stringify(data)).email;
     let password =  JSON.parse(JSON.stringify(data)).password;
 
-    let name = 'token';
-    let token = (name = (document.cookie + ';').match(new RegExp(name + '=.*;'))) && name[0].split(/[=;]/)[1];
-    console.log(token);
 
     fetch("/api/token", {
         method: "POST",
         body: JSON.stringify({email, password}),
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
         },
         credentials:'include'
     }).then(r => r.json())

@@ -58,7 +58,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests()
-                .requestMatchers("/account").authenticated().anyRequest().permitAll().and()
+                .requestMatchers("/add").authenticated().anyRequest().permitAll().and()
                 .httpBasic().disable()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .formLogin().disable()
