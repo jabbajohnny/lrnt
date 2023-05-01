@@ -30,8 +30,14 @@ public class MyFirstApp {
     }
 
     @RequestMapping("/account")
-    public String account() {
-        return "/default/account";
+    public String account(@CookieValue(name = "token", defaultValue = "") String token) {
+        System.out.println(token);
+        try {
+            jwtUtils.getAuthenticationFromJwt(token).isAuthenticated();
+            return "/auth/account";
+        } catch (Exception e) {
+            return "/default/account";
+        }
     }
 
     @RequestMapping("/confirm")
