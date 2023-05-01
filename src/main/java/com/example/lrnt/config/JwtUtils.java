@@ -39,4 +39,11 @@ public class JwtUtils {
 
         return authentication;
     }
+
+    public String getEmail(String token) {
+        jwt = decoder.decode(token);
+        Map<String, Object> claims = jwt.getClaims();
+        return userDetailsService.loadUserByUsername((String) claims.get("sub")).getUsername();
+    }
+
 }
