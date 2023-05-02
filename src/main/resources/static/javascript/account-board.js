@@ -24,3 +24,8 @@ window.onload = function (){
         });
 
 }
+
+document.getElementById("logout-button").addEventListener("click", function (event) {
+    document.cookie = "token=;path=/;expires=" + new Date(0).toUTCString();
+    window.location.href = "/"
+})
