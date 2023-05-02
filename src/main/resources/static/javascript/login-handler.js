@@ -61,7 +61,7 @@ function loginUser() {
     }).then(r => r.json())
         .then(data => {
             const json = JSON.parse(JSON.stringify(data));
-            document.cookie='token='+ json.token;
+            document.cookie='token='+ json.token + "; max-age=259200;"
             window.location.href = '/';
         })
         .catch(error => {
