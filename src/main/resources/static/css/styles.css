@@ -23,6 +23,14 @@ h1 {
     margin-right: 13%;
 }
 
+.navbar-auth li {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 20px;
+    display: inline-block;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 #homepage-image {
     width: 25%;
     float: right;

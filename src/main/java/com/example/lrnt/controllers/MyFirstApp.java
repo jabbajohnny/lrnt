@@ -40,6 +40,16 @@ public class MyFirstApp {
         }
     }
 
+    @RequestMapping("/upload")
+    public String upload(@CookieValue(name = "token", defaultValue = "") String token) {
+        try {
+            jwtUtils.getAuthenticationFromJwt(token).isAuthenticated();
+            return "/auth/upload";
+        } catch (Exception e) {
+            return "redirect:/account";
+        }
+    }
+
     @RequestMapping("/confirm")
     public String confirm(@RequestParam("id") String id) {
         if (AccountVerifier.verify(id, repository).equals("confirmed")) {
@@ -47,4 +57,5 @@ public class MyFirstApp {
         }
         return "Error";
     }
+
 }
