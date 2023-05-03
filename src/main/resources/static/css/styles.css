@@ -126,6 +126,28 @@ h1 {
     font-size: medium;
 }
 
+.upload-form {
+    display: inline-block;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+.upload-details {
+    display: block;
+    width: 100%;
+    margin: 5%;
+}
+
+#upload-button {
+    font-family: 'League Spartan', sans-serif;
+    background-color: #ef440a;
+    color: #f4e8e8;
+    border-radius: 5px;
+    width: 25%;
+    margin: 5%;
+}
+
 
 
 
