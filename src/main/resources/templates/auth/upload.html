@@ -24,13 +24,14 @@
 </nav>
 
 <div>
-    <form class="upload-form">
+    <form class="upload-form" id="upload-form">
         <label class="upload-details">Title:</label><input class="upload-details" required>
         <label class="upload-details" >Description:</label><input class="upload-details" required>
         <label class="upload-details">Upload a file:</label><input class="upload-details" type="file" required>
-        <button id="upload-button">Upload</button>
+        <button id="upload-button" type="submit">Upload</button>
     </form>
 </div>
 
 </body>
+<script th:src="@{/javascript/upload.js}"></script>
 </html>
