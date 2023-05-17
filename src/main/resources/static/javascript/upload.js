@@ -6,15 +6,15 @@ document.getElementById("upload-form").addEventListener("submit", function (even
 
 function upload() {
     const form = document.getElementById("upload-form");
+    const fileInput = document.getElementById("upload-file");
     const formData = new FormData(form);
 
-    console.log("ddd");
+    formData.append("file", fileInput.files[0]);
+
+    console.log(formData.entries().next());
 
     fetch("/api/upload", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
         body: formData
     }).then(r => r.json())
         .then(data => {
