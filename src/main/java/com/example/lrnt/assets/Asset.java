@@ -4,5 +4,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
-public record Asset(String title, String description) {
+public record Asset(String title, String description, MultipartFile file) {
 }

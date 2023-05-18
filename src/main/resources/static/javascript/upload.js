@@ -9,7 +9,6 @@ function upload() {
     const fileInput = document.getElementById("upload-file");
     const formData = new FormData(form);
 
-    formData.append("file", fileInput.files[0]);
 
     console.log(formData.entries().next());
 

@@ -11,8 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class AssetsApiController {
 
     @PostMapping("/api/upload")
-    public ResponseEntity<JsonNode> upload(@RequestPart MultipartFile file) {
+    public ResponseEntity<JsonNode> upload(@RequestPart("file") MultipartFile file, @RequestPart("title") String title,
+                                           @RequestPart("description") String description) {
         System.out.println(file.getName());
+        System.out.println(title);
+        System.out.println(description);
         return null;
     }
 }
