@@ -46,4 +46,11 @@ public class JwtUtils {
         return userDetailsService.loadUserByUsername((String) claims.get("sub")).getUsername();
     }
 
+    public String getId(String token) {
+        jwt = decoder.decode(token);
+        Map<String, Object> claims = jwt.getClaims();
+        String email = userDetailsService.loadUserByUsername((String) claims.get("sub")).getUsername();
+        return repository.findAllByEmail(email).get(0).getId();
+    }
+
 }

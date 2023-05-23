@@ -1,7 +1,9 @@
 package com.example.lrnt.controllers;
 
-import com.example.lrnt.assets.Asset;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.lrnt.config.JwtUtils;
+import com.example.lrnt.database.AssetRepository;
+import com.example.lrnt.database.DatabaseAsset;
+import com.example.lrnt.database.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +11,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Controller
 public class AssetsApiController {
+
+    private final AssetRepository assetRepository;
+    private final UserRepository userRepository;
+    private final JwtUtils jwtUtils;
+
+    public AssetsApiController(AssetRepository assetRepository, UserRepository userRepository, JwtUtils jwtUtils) {
+        this.assetRepository = assetRepository;
+        this.userRepository = userRepository;
+        this.jwtUtils = jwtUtils;
+    }
 
     @PostMapping("/api/upload")
     public ResponseEntity<JsonNode> upload(@RequestPart("file") MultipartFile file,
                                            @RequestPart("title") String title,
-                                           @RequestPart("description") String description) throws JsonProcessingException {
+                                           @RequestPart("description") String description,
+                                           @CookieValue(name = "token", defaultValue = "") String token
+    ) throws IOException {
         //if file is not mp3 or any other audio format, return error
         ObjectMapper mapper = new ObjectMapper();
 
@@ -25,7 +41,9 @@ public class AssetsApiController {
         }
 
         //if file is ok, save the file, create an asset, store info about asset in database table
-        Asset asset = new Asset(title, description, file);
+        DatabaseAsset asset = new DatabaseAsset(title, description, jwtUtils.getId(token), userRepository, assetRepository);
+        asset.saveFile(file);
+        assetRepository.save(asset);
         return null;
     }
 }
