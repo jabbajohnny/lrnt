@@ -1,5 +1,4 @@
 document.getElementById("upload-form").addEventListener("submit", function (event) {
-    console.log("ddd");
     event.preventDefault();
     upload();
 })
@@ -8,7 +7,7 @@ function upload() {
     const form = document.getElementById("upload-form");
     const fileInput = document.getElementById("upload-file");
     const formData = new FormData(form);
-
+    const errorInfo = document.getElementById("error-info");
 
     console.log(formData.entries().next());
 
@@ -17,7 +16,15 @@ function upload() {
         body: formData
     }).then(r => r.json())
         .then(data => {
-            console.log(data);
+            if (!data.ok) {
+                errorInfo.innerText = JSON.parse(JSON.stringify(data)).error;
+                return false;
+            } else {
+                window.location.href = "/";
+                return true;
+            }
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error)
+        });
 }

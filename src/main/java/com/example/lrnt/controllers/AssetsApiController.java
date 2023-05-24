@@ -6,6 +6,7 @@ import com.example.lrnt.database.DatabaseAsset;
 import com.example.lrnt.database.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,13 +38,15 @@ public class AssetsApiController {
 
         if (file != null && !file.isEmpty() && !file.getContentType().equals("audio/mpeg")) {
             JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", "Not an audio format!"));
-            return ResponseEntity.ok(json);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
         }
 
         //if file is ok, save the file, create an asset, store info about asset in database table
         DatabaseAsset asset = new DatabaseAsset(title, description, jwtUtils.getId(token), userRepository, assetRepository);
         asset.saveFile(file);
         assetRepository.save(asset);
-        return null;
+
+        JsonNode json = mapper.readTree(String.format("{\"upload\": \"%s\"}", "done"));
+        return ResponseEntity.ok(json);
     }
 }
