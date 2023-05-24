@@ -34,3 +34,4 @@ build/
 /src/main/resources/application.properties
 /src/test/
 /src/main/resources/certs/
+/src/main/storage/
