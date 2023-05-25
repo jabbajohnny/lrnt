@@ -36,7 +36,8 @@ public class AssetsApiController {
         //if file is not mp3 or any other audio format, return error
         ObjectMapper mapper = new ObjectMapper();
 
-        if (file != null && !file.isEmpty() && !file.getContentType().equals("audio/mpeg")) {
+        if (file != null && !file.isEmpty() && (!file.getContentType().equals("audio/mpeg") &&
+                                               !file.getContentType().equals("audio/wav"))) {
             JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", "Not an audio format!"));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
         }
