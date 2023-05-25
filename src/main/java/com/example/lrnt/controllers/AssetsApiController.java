@@ -47,7 +47,7 @@ public class AssetsApiController {
         asset.saveFile(file);
         assetRepository.save(asset);
 
-        JsonNode json = mapper.readTree(String.format("{\"upload\": \"%s\"}", "done"));
+        JsonNode json = mapper.readTree(String.format("{\"ok\": \"%s\"}", "done"));
         return ResponseEntity.ok(json);
     }
 }

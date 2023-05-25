@@ -19,10 +19,9 @@ function upload() {
             if (!data.ok) {
                 errorInfo.innerText = JSON.parse(JSON.stringify(data)).error;
                 return false;
-            } else {
-                window.location.href = "/";
-                return true;
             }
+            window.location.href = "/";
+            return true;
         })
         .catch(error => {
             console.error(error)
