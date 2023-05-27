@@ -23,7 +23,6 @@ import java.time.format.DateTimeFormatter;
 public class DatabaseAsset {
 
     public DatabaseAsset(String title, String description, String userId,
-                         UserRepository userRepository,
                          AssetRepository assetRepository) {
         this.title = title;
         this.description = description;
