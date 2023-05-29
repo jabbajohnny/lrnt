@@ -70,7 +70,7 @@ public class AssetsApiController {
             objectNode.put("id", asset.getId());
             objectNode.put("title", asset.getTitle());
             objectNode.put("description", asset.getDescription());
-            objectNode.put("author", "user"); //pass users name, not id
+            objectNode.put("author", userRepository.findAllById(asset.getUserId()).get(0).getUsername());
             objectNode.put("upload_date", asset.getUploadDate());
 
             node.add(objectNode);
