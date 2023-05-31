@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LRNT</title>
+    <title>Account</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,21 +15,24 @@
     <h1>LRNT</h1>
 </header>
 <nav>
-    <ul class="navbar-auth">
-        <li><a href="#">Homepage</a></li>
-        <li><a href="/browse">Browse</a></li>
-        <li><a href="/upload">Upload</a></li>
+    <ul class="navbar">
+        <li><a href="/">Homepage</a></li>
+        <li><a href="#">Browse</a></li>
         <li><a href="/account">Account</a></li>
     </ul>
 </nav>
+<main>
+    <div asset-container>
 
 
-<!-- content for users - logged in -->
-<div id="user-content">
-    <button class="homepage-button">Let's find something!</button>
-</div>
-
-<img id="homepage-image" th:src="@{/css/vectors/homepage.svg}" alt="Audio">
-
+    </div>
+    <template asset-template>
+        <div class="assets">
+            <div class="title" title></div>
+            <div class="body" description></div>
+        </div>
+    </template>
+</main>
 </body>
+<script th:src="@{/javascript/browse.js}"></script>
 </html>

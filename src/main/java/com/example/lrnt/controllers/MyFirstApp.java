@@ -58,4 +58,15 @@ public class MyFirstApp {
         return "Error";
     }
 
+    @RequestMapping("/browse")
+    public String browse(@CookieValue(name = "token", defaultValue = "") String token) {
+        System.out.println(token);
+        try {
+            jwtUtils.getAuthenticationFromJwt(token).isAuthenticated();
+            return "/default/browse";
+        } catch (Exception e) {
+            return "/default/browse";
+        }
+    }
+
 }
