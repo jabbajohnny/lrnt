@@ -1,0 +1,22 @@
+.assets {
+    width: 20%;
+    height: 100px;
+    display: inline-block;
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-top: 3%;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+.title {
+    font-family: 'League Spartan', sans-serif;
+    font-size: large;
+}
+
+.body {
+    font-family: 'League Spartan', sans-serif;
+    font-size: small;
+}
