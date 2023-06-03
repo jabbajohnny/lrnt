@@ -1,4 +1,6 @@
 .assets {
+    position: relative;
+    font-family: 'League Spartan', sans-serif;
     width: 20%;
     height: 100px;
     display: inline-block;
@@ -8,15 +10,30 @@
     padding: 4px;
     box-sizing: border-box;
     border: 2px solid black;
-    border-radius: 2px;
+    border-radius: 16px;
 }
 
 .title {
-    font-family: 'League Spartan', sans-serif;
-    font-size: large;
+    font-size: 24px;
 }
 
 .body {
-    font-family: 'League Spartan', sans-serif;
-    font-size: small;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.47);
+}
+
+.author {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 10px;
+    text-align: right;
+}
+
+.upload-date {
+    position: absolute;
+    left: 70%;
+    bottom: 5px;
+    font-size: 10px;
+    margin-right: 5%;
 }

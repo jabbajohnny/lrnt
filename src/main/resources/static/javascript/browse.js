@@ -12,9 +12,13 @@ window.onload = function () {
                 const assetCard = asset.content.cloneNode(true).querySelector(".assets");
                 const title = assetCard.querySelector("[title]");
                 const description = assetCard.querySelector("[description]")
+                const author = assetCard.querySelector("[author]")
+                const uploadDate = assetCard.querySelector("[upload-date]")
 
                 title.textContent = assetObject.title;
                 description.textContent = assetObject.description;
+                author.textContent = assetObject.author;
+                uploadDate.textContent = assetObject.upload_date;
 
                 assetContainer.append(assetCard);
             })
