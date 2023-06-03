@@ -15,8 +15,12 @@ window.onload = function () {
                 const author = assetCard.querySelector("[author]")
                 const uploadDate = assetCard.querySelector("[upload-date]")
 
+                if (assetObject.description.length > 115) {
+                    description.textContent = assetObject.description.substring(0, 115) + "...";
+                } else {
+                    description.textContent = assetObject.description;
+                }
                 title.textContent = assetObject.title;
-                description.textContent = assetObject.description;
                 author.textContent = assetObject.author;
                 uploadDate.textContent = assetObject.upload_date;
 
