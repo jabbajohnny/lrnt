@@ -69,4 +69,14 @@ public class MyFirstApp {
         }
     }
 
+    @RequestMapping ("/{assetId}")
+    public String assetPage(@PathVariable String assetId, @CookieValue(name = "token", defaultValue = "") String token) {
+        System.out.println(token);
+        try {
+            jwtUtils.getAuthenticationFromJwt(token).isAuthenticated();
+            return "/default/asset";
+        } catch (Exception e) {
+            return "/default/asset";
+        }
+    }
 }

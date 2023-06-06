@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Account</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/asset-page.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <h1>LRNT</h1>
+</header>
+<nav>
+  <ul class="navbar">
+    <li><a href="/">Homepage</a></li>
+    <li><a href="/browse">Browse</a></li>
+    <li><a href="/account">Account</a></li>
+  </ul>
+</nav>
+<main>
+  <div asset>
+    <h1 class="title" title></h1>
+    <p class="description" description></p>
+  </div>
+</main>
+</body>
+<script th:src="@{/javascript/asset.js}"></script>
+</html>
