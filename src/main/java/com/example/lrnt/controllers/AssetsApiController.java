@@ -52,7 +52,7 @@ public class AssetsApiController {
         }
 
         //if file is ok, save the file, create an asset, store info about asset in database table
-        DatabaseAsset asset = new DatabaseAsset(title, description, jwtUtils.getId(token), userRepository, assetRepository);
+        DatabaseAsset asset = new DatabaseAsset(title, description, jwtUtils.getId(token), assetRepository);
         asset.saveFile(file);
         assetRepository.save(asset);
 
