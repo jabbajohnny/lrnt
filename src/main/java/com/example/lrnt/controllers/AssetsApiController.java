@@ -59,7 +59,7 @@ public class AssetsApiController {
         JsonNode json = mapper.readTree(String.format("{\"ok\": \"%s\"}", "done"));
         return ResponseEntity.ok(json);
     }
-    
+
     @GetMapping("/api/asset/{assetId}")
     public ResponseEntity<JsonNode> getAssetData(@PathVariable("assetId") String id) {
         List<DatabaseAsset> assets;

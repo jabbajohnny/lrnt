@@ -2,8 +2,6 @@ const asset = document.querySelector("[asset-template]");
 const assetContainer = document.querySelector("[asset-container]");
 let assets = [];
 
-
-// TODO: Make separate box for every asset - put them in nice layout
 window.onload = function () {
     fetch("/api/asset/all")
         .then(r => r.json())
