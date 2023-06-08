@@ -59,11 +59,16 @@ public class AssetsApiController {
         JsonNode json = mapper.readTree(String.format("{\"ok\": \"%s\"}", "done"));
         return ResponseEntity.ok(json);
     }
+    
+    @GetMapping("/api/asset/{assetId}")
+    public ResponseEntity<JsonNode> getAssetData(@PathVariable("assetId") String id) {
+        List<DatabaseAsset> assets;
 
-    @GetMapping("/api/assets")
-    public ResponseEntity<JsonNode> getAssets() {
-        List<DatabaseAsset> assets = assetRepository.getAll();
-        System.out.println(assets);
+        if (id.equals("all")) {
+            assets = assetRepository.getAll();
+        } else {
+            assets = assetRepository.getDatabaseAssetById(id);
+        }
 
         ArrayNode node = factory.arrayNode();
 
@@ -77,32 +82,6 @@ public class AssetsApiController {
 
             node.add(objectNode);
         });
-
-        return ResponseEntity.ok(node);
-    }
-
-    /* TODO:
-        getAssetData() and getAssets() are sharing most of the code.
-        One method should be made which will serve 2 purposes
-                - get 1 asset from id
-                - get all assets when no id is provided
-
-     */
-    @GetMapping("/api/asset/{assetId}")
-    public ResponseEntity<JsonNode> getAssetData(@PathVariable("assetId") String id) {
-        DatabaseAsset asset = assetRepository.getDatabaseAssetById(id).get(0);
-
-        ArrayNode node = factory.arrayNode();
-
-        ObjectNode objectNode = factory.objectNode();
-
-        objectNode.put("id", asset.getId());
-        objectNode.put("title", asset.getTitle());
-        objectNode.put("description", asset.getDescription());
-        objectNode.put("author", userRepository.findAllById(asset.getUserId()).get(0).getUsername());
-        objectNode.put("upload_date", asset.getUploadDate());
-
-        node.add(objectNode);
 
         return ResponseEntity.ok(node);
     }

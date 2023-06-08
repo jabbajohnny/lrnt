@@ -5,7 +5,7 @@ let assets = [];
 
 // TODO: Make separate box for every asset - put them in nice layout
 window.onload = function () {
-    fetch("/api/assets")
+    fetch("/api/asset/all")
         .then(r => r.json())
         .then(data => {
             assets = data.map(assetObject => {
