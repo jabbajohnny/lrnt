@@ -93,7 +93,8 @@ public class AssetsApiController {
     }
 
     @GetMapping(value = "/api/asset/{assetId}/audio", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<InputStreamResource> getAudio(@PathVariable("assetId") String assetId) throws FileNotFoundException {
+    public ResponseEntity<InputStreamResource> getAudio(@PathVariable("assetId") String assetId,
+                                                        @RequestParam(name = "seek", required = false) String seekPosition) throws FileNotFoundException {
         String path =
                 assetRepository.getDatabaseAssetById(assetId).get(0).getPath();
         Path audio  = Paths.get(path);
@@ -101,6 +102,12 @@ public class AssetsApiController {
         InputStreamResource resource =
                 new InputStreamResource(new FileInputStream(audio.toFile()));
 
+        //TODO: when true,
+        // method should return new audio version which starts from passed position
+        if(seekPosition != null) {
+            double seek = Double.parseDouble(seekPosition);
+            System.out.println("new position: " + seek);
+        }
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
