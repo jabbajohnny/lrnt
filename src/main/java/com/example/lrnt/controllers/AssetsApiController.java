@@ -9,14 +9,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -84,5 +90,20 @@ public class AssetsApiController {
         });
 
         return ResponseEntity.ok(node);
+    }
+
+    @GetMapping(value = "/api/asset/{assetId}/audio", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<InputStreamResource> getAudio(@PathVariable("assetId") String assetId) throws FileNotFoundException {
+        String path =
+                assetRepository.getDatabaseAssetById(assetId).get(0).getPath();
+        Path audio  = Paths.get(path);
+
+        InputStreamResource resource =
+                new InputStreamResource(new FileInputStream(audio.toFile()));
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 }
