@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             audioSource.src = "http://localhost:8080/api/asset/" + assetId + "/audio";
 
             audioPlayer.load();
-            
+
         })
 
 })

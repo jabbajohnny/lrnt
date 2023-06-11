@@ -12,6 +12,7 @@ window.onload = function () {
                 const description = assetCard.querySelector("[description]")
                 const author = assetCard.querySelector("[author]")
                 const uploadDate = assetCard.querySelector("[upload-date]")
+                const link = assetCard.querySelector("[link]");
 
                 if (assetObject.description.length > 115) {
                     description.textContent = assetObject.description.substring(0, 115) + "...";
@@ -21,6 +22,8 @@ window.onload = function () {
                 title.textContent = assetObject.title;
                 author.textContent = assetObject.author;
                 uploadDate.textContent = assetObject.upload_date;
+
+                link.href = "/" + assetObject.id;
 
                 assetContainer.append(assetCard);
             })
