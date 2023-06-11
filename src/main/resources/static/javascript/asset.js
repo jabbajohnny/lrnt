@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
             audioSource.src = "http://localhost:8080/api/asset/" + assetId + "/audio";
 
             audioPlayer.load();
+            
         })
+
 })
 
 audioPlayer.onseeking = function () {
     console.log(audioPlayer.currentTime);
     audioSource.src = "http://localhost:8080/api/asset/" + assetId + "/audio?seek=" + audioPlayer.currentTime;
-
-    audioPlayer.load();
 }

@@ -17,10 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.sound.sampled.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -94,20 +97,32 @@ public class AssetsApiController {
 
     @GetMapping(value = "/api/asset/{assetId}/audio", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<InputStreamResource> getAudio(@PathVariable("assetId") String assetId,
-                                                        @RequestParam(name = "seek", required = false) String seekPosition) throws FileNotFoundException {
-        String path =
-                assetRepository.getDatabaseAssetById(assetId).get(0).getPath();
-        Path audio  = Paths.get(path);
+                                                        @RequestParam(name = "seek", required = false) String seekPosition) throws IOException,
+                                                                                                                                   UnsupportedAudioFileException {
+        Path path  = Paths.get(assetRepository.getDatabaseAssetById(assetId).get(0).getPath());
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(path.toFile());
 
-        InputStreamResource resource =
-                new InputStreamResource(new FileInputStream(audio.toFile()));
+        File temp = File.createTempFile("temp", ".wav");
 
-        //TODO: when true,
-        // method should return new audio version which starts from passed position
         if(seekPosition != null) {
             double seek = Double.parseDouble(seekPosition);
+
+            AudioFormat format = audioInputStream.getFormat();
+            long endFrame = audioInputStream.getFrameLength();
+            long startFrame = (long)(seek * format.getFrameRate());
+
+            audioInputStream.skip(startFrame * format.getFrameSize());
+
+            audioInputStream = new AudioInputStream(audioInputStream, format, endFrame - startFrame);
+
             System.out.println("new position: " + seek);
         }
+
+        AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, temp);
+
+        InputStreamResource resource =
+                new InputStreamResource(new FileInputStream(temp));
+
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
