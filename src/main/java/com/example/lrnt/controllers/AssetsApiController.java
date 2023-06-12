@@ -1,5 +1,6 @@
 package com.example.lrnt.controllers;
 
+import com.example.lrnt.audio.AudioUtils;
 import com.example.lrnt.config.JwtUtils;
 import com.example.lrnt.database.AssetRepository;
 import com.example.lrnt.database.DatabaseAsset;
@@ -101,6 +102,10 @@ public class AssetsApiController {
                                                                                                                                    UnsupportedAudioFileException {
         Path path  = Paths.get(assetRepository.getDatabaseAssetById(assetId).get(0).getPath());
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(path.toFile());
+
+        if (!path.getFileName().endsWith(".wav")) {
+            audioInputStream = AudioUtils.convertToWav(audioInputStream);
+        }
 
         File temp = File.createTempFile("temp", ".wav");
 
