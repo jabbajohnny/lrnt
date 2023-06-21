@@ -21,9 +21,17 @@ h1 {
     font-family: 'League Spartan', sans-serif;
     font-size: 20px;
     display: inline-block;
-    margin-left: 13%;
-    margin-right: 13%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
+a {
+    width: 100%;
+}
+
+a:hover {
+    color: rgba(255, 255, 255, 0.09);
+}
+
 
 .navbar-auth li {
     font-family: 'League Spartan', sans-serif;

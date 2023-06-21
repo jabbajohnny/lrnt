@@ -63,7 +63,7 @@ public class MyFirstApp {
         System.out.println(token);
         try {
             jwtUtils.getAuthenticationFromJwt(token).isAuthenticated();
-            return "/default/browse";
+            return "/auth/browse";
         } catch (Exception e) {
             return "/default/browse";
         }
@@ -74,7 +74,7 @@ public class MyFirstApp {
         System.out.println(token);
         try {
             jwtUtils.getAuthenticationFromJwt(token).isAuthenticated();
-            return "/default/asset";
+            return "/auth/asset";
         } catch (Exception e) {
             return "/default/asset";
         }
