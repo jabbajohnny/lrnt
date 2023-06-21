@@ -1,5 +1,7 @@
 const title = document.querySelector("[title]");
 const description = document.querySelector("[description]");
+const uploadDate = document.querySelector("[upload-date]");
+const author = document.querySelector("[author]");
 
 const audioPlayer = document.getElementById("audio-player");
 const audioSource = document.querySelector("[source]");
@@ -14,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             title.textContent = data[0].title;
             description.textContent = data[0].description;
+            uploadDate.textContent = data[0].upload_date;
+            author.textContent = data[0].author;
 
             audioSource.src = "http://localhost:8080/api/asset/" + assetId + "/audio";
 
