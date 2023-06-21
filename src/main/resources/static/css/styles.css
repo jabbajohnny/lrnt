@@ -24,13 +24,6 @@ h1 {
     margin-left: 10%;
     margin-right: 10%;
 }
-a {
-    width: 100%;
-}
-
-a:hover {
-    color: rgba(255, 255, 255, 0.09);
-}
 
 
 .navbar-auth li {
