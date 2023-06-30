@@ -55,9 +55,8 @@ public class AssetsApiController {
     ) throws IOException {
         //if file is not mp3 or any other audio format, return error
 
-        if (file != null && !file.isEmpty() && (!file.getContentType().equals("audio/mpeg") &&
-                                               !file.getContentType().equals("audio/wav"))) {
-            JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", "Not an audio format!"));
+        if (file != null && !file.isEmpty() && !file.getContentType().equals("audio/wav")) {
+            JsonNode json = mapper.readTree(String.format("{\"error\": \"%s\"}", "Not a supported audio format! Please use wav format."));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
         }
 
