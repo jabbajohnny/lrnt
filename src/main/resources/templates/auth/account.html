@@ -26,9 +26,21 @@
     <div class="account-tab">
         <img id="avatar" src="">
         <p id="username"></p>
+        <div asset-container>
+
+        </div>
         <button id="logout-button" type="button">Logout</button>
     </div>
 
+    <template assets-template>
+        <div class="assets">
+            <a link href="" id="link"></a>
+            <div class="title" title></div>
+            <div class="body" description></div>
+            <div class="author" author></div>
+            <div class="upload-date" upload-date></div>
+        </div>
+    </template>
 </main>
 </body>
 <script th:src="@{/javascript/account-board.js}"></script>

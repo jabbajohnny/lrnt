@@ -5,7 +5,7 @@ const author = document.querySelector("[author]");
 
 const audioPlayer = document.getElementById("audio-player");
 const audioSource = document.querySelector("[source]");
-
+const seekButton = document.getElementById("seek-button");
 const assetId = window.location.href.slice(-11);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,4 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 audioPlayer.onseeking = function () {
     console.log(audioPlayer.currentTime);
     audioSource.src = "http://localhost:8080/api/asset/" + assetId + "/audio?seek=" + audioPlayer.currentTime;
+}
+
+seekButton.onclick = function () {
+    audioSource.src = "http://localhost:8080/api/asset/" + assetId + "/audio?seek=" + 10;
+    audioPlayer.load();
+    audioPlayer.start();
 }

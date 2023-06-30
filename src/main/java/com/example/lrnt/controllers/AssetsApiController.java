@@ -70,14 +70,15 @@ public class AssetsApiController {
     }
 
     @GetMapping("/api/asset/{assetId}")
-    public ResponseEntity<JsonNode> getAssetData(@PathVariable("assetId") String id) {
+    public ResponseEntity<JsonNode> getAssetData(@PathVariable("assetId") String id,
+                                                 @CookieValue(name = "token", defaultValue = "") String token) {
         List<DatabaseAsset> assets;
 
-        if (id.equals("all")) {
-            assets = assetRepository.getAll();
-        } else {
-            assets = assetRepository.getDatabaseAssetById(id);
-        }
+        assets = switch (id) {
+            case "all" -> assetRepository.getAll();
+            case "allByUser" -> assetRepository.getDatabaseAssetByUserId(jwtUtils.getId(token));
+            default -> assetRepository.getDatabaseAssetById(id);
+        };
 
         ArrayNode node = factory.arrayNode();
 
