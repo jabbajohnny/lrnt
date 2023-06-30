@@ -19,6 +19,18 @@
     <dependencies>
 
         <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-all-deps</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>net.javazoom</groupId>
             <artifactId>mp3spi</artifactId>
             <version>1.9.13</version>

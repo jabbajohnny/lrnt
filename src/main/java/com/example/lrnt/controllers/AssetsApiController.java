@@ -103,9 +103,6 @@ public class AssetsApiController {
         Path path  = Paths.get(assetRepository.getDatabaseAssetById(assetId).get(0).getPath());
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(path.toFile());
 
-        if (!path.getFileName().endsWith(".wav")) {
-            audioInputStream = AudioUtils.convertToWav(audioInputStream);
-        }
 
         File temp = File.createTempFile("temp", ".wav");
 
@@ -123,10 +120,14 @@ public class AssetsApiController {
             System.out.println("new position: " + seek);
         }
 
-        AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, temp);
+        InputStreamResource resource;
 
-        InputStreamResource resource =
-                new InputStreamResource(new FileInputStream(temp));
+        if (path.toAbsolutePath().toString().endsWith(".wav")) {
+            AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, temp);
+            resource = new InputStreamResource(new FileInputStream(temp));
+        } else {
+            resource = new InputStreamResource(audioInputStream);
+        }
 
         return ResponseEntity
                 .ok()
