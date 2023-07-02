@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Account</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/account-board.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +25,12 @@
 </nav>
 <main>
     <div class="account-tab">
-        <img id="avatar" src="">
-        <p id="username"></p>
-        <div asset-container>
+        <div id="profile-card">
+            <img id="avatar" src="">
+            <p id="username"></p>
+        </div>
+
+        <div class="asset-container" asset-container>
 
         </div>
         <button id="logout-button" type="button">Logout</button>
